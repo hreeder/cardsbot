@@ -27,11 +27,12 @@ class CardsBot(sleekxmpp.ClientXMPP):
         output = "The following commands are available:"
 
         for command in self.commands:
-            output += "\r\n\t%s%s" % (config.xmpp['trigger'], command)
+            output += "\r\n    %s%s" % (config.xmpp['trigger'], command)
 
         return output
 
     def muc_message_handler(self, msg):
+        print "<%s> %s" % (msg['from'], msg['body'])
         if msg['body'][0] == config.xmpp['trigger']:
             if " " in msg['body']:
                 firstWord = msg['body'][1:].split(" ")[0]
