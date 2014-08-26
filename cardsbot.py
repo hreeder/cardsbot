@@ -2,14 +2,16 @@
 import config
 import sleekxmpp
 import logging
+import cardsgame
 from optparse import OptionParser
 
 class CardsBot(sleekxmpp.ClientXMPP):
     def __init__(self, jid, password):
-        sleekxmpp.ClientXMPP.__init__(self, jid + "/cahbot-0.01", password)
+        sleekxmpp.ClientXMPP.__init__(self, jid + "/cahbot-dev-0.01", password)
         self.add_event_handler("session_start", self.start)
         self.add_event_handler("groupchat_message", self.muc_message_handler)
         self.commands = {}
+        self.config = config
 
     def start(self, args):
         self.send_presence()
@@ -77,6 +79,9 @@ if __name__ == "__main__":
 
     xmpp = CardsBot(config.xmpp['jid'], config.xmpp['password'])
     xmpp.register_plugin('xep_0045')
+    
+    cah = cardsgame.CardsGame(xmpp)   
+    cah.register_commands(xmpp)
 
     if xmpp.connect():
         xmpp.process(block=True)
