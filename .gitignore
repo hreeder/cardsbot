@@ -2,3 +2,5 @@
 .idea/
 *.pyc
 config.py
+.project
+.pydevproject
