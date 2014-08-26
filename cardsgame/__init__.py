@@ -47,4 +47,10 @@ class CardsGame(object):
         if not self.game_open:
             return "There is no game open to join. Open one with %sopen" % (self.client.config.xmpp['trigger'])
         
+        jid = self.get_jid(msg)
         
+        if jid in self.players:
+            return "%s: You are already in the game!" % (msg['from'].resource,)
+        
+        self.players.append(jid)
+        return "%s has joined the game!" % (msg['from'].resource,)
