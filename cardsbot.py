@@ -46,11 +46,12 @@ class CardsBot(sleekxmpp.ClientXMPP):
             try:
                 output = self.commands[firstWord](msg)
 
-                self.send_message(
-                    mto=msg['from'].bare,
-                    mbody=output,
-                    mtype="groupchat"
-                )
+                if output:
+                    self.send_message(
+                                      mto=msg['from'].bare,
+                                      mbody=output,
+                                      mtype="groupchat"
+                                      )
             except KeyError:
                 self.send_message(
                     mto=msg['from'].bare,
