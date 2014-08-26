@@ -5,6 +5,7 @@ class CardsGame(object):
         self.game_open=False
         self.game_in_progress=False
         
+        self.game_owner = None
         self.players = []
         
     def register_commands(self, xmpp):
@@ -26,8 +27,11 @@ class CardsGame(object):
         if self.game_open:
             return "A game is already open or in progress. Maybe try joining the game?"
 
+        jid = self.get_jid(msg)
+
         self.game_open=True
-        self.players.append(self.get_jid(msg))
+        self.game_owner=jid
+        self.players.append(jid)
         
         self.client.send_message(mto=msg['from'].bare,
                                  mtype="groupchat",
