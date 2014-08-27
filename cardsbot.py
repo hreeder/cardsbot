@@ -26,12 +26,7 @@ class CardsBot(sleekxmpp.ClientXMPP):
         self.commands[command] = function
 
     def help_text(self, msg):
-        output = "The following commands are available:"
-
-        for command in self.commands:
-            output += "\r\n    %s%s" % (config.xmpp['trigger'], command)
-
-        return output
+        return "The following commands are available: " + ", ".join(["%s%s" % (config.xmpp['trigger'], command) for command in self.commands])
 
     def muc_message_handler(self, msg):
         print "<%s> %s" % (msg['from'], msg['body'])
