@@ -85,6 +85,6 @@ if __name__ == "__main__":
     cah.register_commands(xmpp)
 
     if xmpp.connect():
-        xmpp.process(block=True)
+        xmpp.process()
     else:
         print("Unable to connect")
