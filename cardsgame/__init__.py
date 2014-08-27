@@ -101,7 +101,7 @@ class CardsGame(object):
             
         self.client.send_message(mto=msg['from'].bare,
                                  mtype="groupchat",
-                                 mbody="%s is the Card Csar for this round." % (tsar,)
+                                 mbody="%s is the Card Tsar for this round." % (tsar,)
                                  )
         
         # Allow cards to be played
